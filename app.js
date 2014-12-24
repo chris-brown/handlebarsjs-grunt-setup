@@ -8,19 +8,17 @@
 	  containerId: '#container',
 
 	  init: function(){
-	  	this.$container = $j(this.containerId);
-
 	  	this.getData();
 	  },
 
 	  getData: function(){
-	  	$j.getJSON(this.query, this.callback)
+	  	$j.getJSON(this.query, $j.proxy(this.callback, this))
 	  },
 
 	  callback: function(data){
 	  	if(data && data.length > 0){
 		  	var compiledTemplate = Handlebars.templates['demo-list'];
-		  	$j('#container').html(compiledTemplate(data));
+		  	$j(this.containerId).html(compiledTemplate(data));
 	  	}
 	  }
 
